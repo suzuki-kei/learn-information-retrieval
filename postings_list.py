@@ -180,26 +180,38 @@ class UnionTestCase(unittest.TestCase):
 
 
 def intersect(
-        postings1: typing.List[int],
-        postings2: typing.List[int]
+        postings_list1: typing.List[int],
+        postings_list2: typing.List[int]
         ) -> typing.List[int]:
     """
-        2 つの Postings List の積集合を求める.
+        2 つの postings list の積集合を求める.
+
+        Arguments
+        ---------
+        postings_list1 : typing.List[int]
+            postings list.
+        postings_list2 : typing.List[int]
+            postings list.
+
+        Returns
+        -------
+        typing.List[int]
+            postings_list1 と postings_list2 の積.
     """
     index1 = 0
     index2 = 0
-    postings = []
-    while index1 < len(postings1) and index2 < len(postings2):
-        if postings1[index1] < postings2[index2]:
+    postings_list = []
+    while index1 < len(postings_list1) and index2 < len(postings_list2):
+        if postings_list1[index1] < postings_list2[index2]:
             index1 += 1
             continue
-        if postings2[index2] < postings1[index1]:
+        if postings_list2[index2] < postings_list1[index1]:
             index2 += 1
             continue
-        postings.append(postings1[index1])
+        postings_list.append(postings_list1[index1])
         index1 += 1
         index2 += 1
-    return postings
+    return postings_list
 
 
 class IntersectTestCase(unittest.TestCase):
