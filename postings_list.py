@@ -19,6 +19,37 @@ import typing
 import unittest
 
 
+def to_postings_list(
+        document_ids: typing.Iterable[int]
+        ) -> typing.List[int]:
+    """
+        文書 ID のリストから postings list を生成する.
+
+        Arguments
+        ---------
+        document_ids : typing.Iterable[int]
+            文書 ID のリスト.
+
+        Returns
+        -------
+        typing.List[int]
+            postings list.
+    """
+    return list(sorted(set(document_ids)))
+
+
+class ToPostingsListTestCase(unittest.TestCase):
+
+    def test(self):
+        self.assertEqual([], to_postings_list([]))
+        self.assertEqual([1], to_postings_list([1]))
+        self.assertEqual([1], to_postings_list([1, 1]))
+        self.assertEqual([1, 2], to_postings_list([1, 2]))
+        self.assertEqual([1, 2], to_postings_list([1, 2, 2]))
+        self.assertEqual([1, 2, 3], to_postings_list([1, 2, 3]))
+        self.assertEqual([1, 2, 3], to_postings_list([1, 2, 3, 3]))
+
+
 def subtract(
         postings_list1: typing.List[int],
         postings_list2: typing.List[int]
